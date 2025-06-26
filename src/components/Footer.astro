@@ -7,10 +7,10 @@ import githubLogo from '../assets/github.svg';
 <hr class="border-t border-gray-200 dark:border-gray-700 my-8" />
 <footer class="h-full justify-center items-center w-full flex flex-col p-4 text-center">
 	&copy; {today.getFullYear()} Timur Dzhesur. All rights reserved.
-	<div class="flex flex-row dark:invert">
+	<div class="flex flex-row">
 		<a href="https://github.com/Land-Maze" target="_blank" class="flex items-center gap-2 hover:opacity-40 transition-opacity duration-300">
 			<span class="sr-only">Check my GitHub</span>
-			<Image src={githubLogo} alt="GitHub Logo" width={32} height={32} />
+			<Image src={githubLogo} alt="GitHub Logo" width={32} height={32} class="dark:invert"/>
 		</a>
 	</div>
 </footer>
