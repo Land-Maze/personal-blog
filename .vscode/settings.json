@@ -1,0 +1,12 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "javascript": "javascript",
+    "css": "css",
+    "astro": "astro",
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "css.enabledLanguages": ["html", "javascript", "css", "astro"],
+}

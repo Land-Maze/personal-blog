@@ -1,21 +1,218 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+@import "tailwindcss";
 
-:root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+@theme{
+  --color-text-50: var(--text-50);
+  --color-text-100: var(--text-100);
+  --color-text-200: var(--text-200);
+  --color-text-300: var(--text-300);
+  --color-text-400: var(--text-400);
+  --color-text-500: var(--text-500);
+  --color-text-600: var(--text-600);
+  --color-text-700: var(--text-700);
+  --color-text-800: var(--text-800);
+  --color-text-900: var(--text-900);
+  --color-text-950: var(--text-950);
+
+  --color-background-50: var(--background-50);
+  --color-background-100: var(--background-100);
+  --color-background-200: var(--background-200);
+  --color-background-300: var(--background-300);
+  --color-background-400: var(--background-400);
+  --color-background-500: var(--background-500);
+  --color-background-600: var(--background-600);
+  --color-background-700: var(--background-700);
+  --color-background-800: var(--background-800);
+  --color-background-900: var(--background-900);
+  --color-background-950: var(--background-950);
+
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+  --color-primary-950: var(--primary-950);
+
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+  --color-secondary-400: var(--secondary-400);
+  --color-secondary-500: var(--secondary-500);
+  --color-secondary-600: var(--secondary-600);
+  --color-secondary-700: var(--secondary-700);
+  --color-secondary-800: var(--secondary-800);
+  --color-secondary-900: var(--secondary-900);
+  --color-secondary-950: var(--secondary-950);
+
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent-800: var(--accent-800);
+  --color-accent-900: var(--accent-900);
+  --color-accent-950: var(--accent-950);
+
+  --color-text: var(--text);
+  --color-background: var(--background);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
 }
+
+
+/* ===== Global Styles ===== */
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --text-50: #eaecfa;
+    --text-100: #d6d9f5;
+    --text-200: #adb3eb;
+    --text-300: #848de1;
+    --text-400: #5b67d7;
+    --text-500: #3241cd;
+    --text-600: #2834a4;
+    --text-700: #1e277b;
+    --text-800: #141a52;
+    --text-900: #0a0d29;
+    --text-950: #050715;
+
+    --background-50: #ebecfa;
+    --background-100: #d6daf5;
+    --background-200: #adb5eb;
+    --background-300: #858fe0;
+    --background-400: #5c6ad6;
+    --background-500: #3345cc;
+    --background-600: #2937a3;
+    --background-700: #1f297a;
+    --background-800: #141c52;
+    --background-900: #0a0e29;
+    --background-950: #050714;
+
+    --primary-50: #ebecfa;
+    --primary-100: #d7daf4;
+    --primary-200: #aeb4ea;
+    --primary-300: #868fdf;
+    --primary-400: #5e6ad4;
+    --primary-500: #3644c9;
+    --primary-600: #2b37a1;
+    --primary-700: #202979;
+    --primary-800: #151b51;
+    --primary-900: #0b0e28;
+    --primary-950: #050714;
+
+    --secondary-50: #f1ebfa;
+    --secondary-100: #e4d7f4;
+    --secondary-200: #c8aeea;
+    --secondary-300: #ad86df;
+    --secondary-400: #915ed4;
+    --secondary-500: #7636c9;
+    --secondary-600: #5e2ba1;
+    --secondary-700: #472079;
+    --secondary-800: #2f1551;
+    --secondary-900: #180b28;
+    --secondary-950: #0c0514;
+
+    --accent-50: #f4ebfa;
+    --accent-100: #e8d7f4;
+    --accent-200: #d2aeea;
+    --accent-300: #bb86df;
+    --accent-400: #a55ed4;
+    --accent-500: #8e36c9;
+    --accent-600: #722ba1;
+    --accent-700: #552079;
+    --accent-800: #391551;
+    --accent-900: #1c0b28;
+    --accent-950: #0e0514;
+
+
+    --text: #090c25;
+    --background: #f3f4fc;
+    --primary: #1b2265;
+    --secondary: #ad86df;
+    --accent: #752ca5;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-50: #050715;
+    --text-100: #0a0d29;
+    --text-200: #141a52;
+    --text-300: #1e277b;
+    --text-400: #2834a4;
+    --text-500: #3241cd;
+    --text-600: #5b67d7;
+    --text-700: #848de1;
+    --text-800: #adb3eb;
+    --text-900: #d6d9f5;
+    --text-950: #eaecfa;
+
+    --background-50: #050714;
+    --background-100: #0a0e29;
+    --background-200: #141c52;
+    --background-300: #1f297a;
+    --background-400: #2937a3;
+    --background-500: #3345cc;
+    --background-600: #5c6ad6;
+    --background-700: #858fe0;
+    --background-800: #adb5eb;
+    --background-900: #d6daf5;
+    --background-950: #ebecfa;
+
+    --primary-50: #050714;
+    --primary-100: #0b0e28;
+    --primary-200: #151b51;
+    --primary-300: #202979;
+    --primary-400: #2b37a1;
+    --primary-500: #3644c9;
+    --primary-600: #5e6ad4;
+    --primary-700: #868fdf;
+    --primary-800: #aeb4ea;
+    --primary-900: #d7daf4;
+    --primary-950: #ebecfa;
+
+    --secondary-50: #0c0514;
+    --secondary-100: #180b28;
+    --secondary-200: #2f1551;
+    --secondary-300: #472079;
+    --secondary-400: #5e2ba1;
+    --secondary-500: #7636c9;
+    --secondary-600: #915ed4;
+    --secondary-700: #ad86df;
+    --secondary-800: #c8aeea;
+    --secondary-900: #e4d7f4;
+    --secondary-950: #f1ebfa;
+
+    --accent-50: #0e0514;
+    --accent-100: #1c0b28;
+    --accent-200: #391551;
+    --accent-300: #552079;
+    --accent-400: #722ba1;
+    --accent-500: #8e36c9;
+    --accent-600: #a55ed4;
+    --accent-700: #bb86df;
+    --accent-800: #d2aeea;
+    --accent-900: #e8d7f4;
+    --accent-950: #f4ebfa;
+
+    --text: #daddf6;
+    --background: #03040c;
+    --primary: #9aa2e4;
+    --secondary: #472079;
+    --accent: #a35ad3;
+  }
+}
+
+
+
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-regular.woff') format('woff');
@@ -35,121 +232,7 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
 	line-height: 1.7;
-}
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
-}
-
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
 }
