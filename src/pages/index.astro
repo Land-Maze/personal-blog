@@ -14,7 +14,7 @@ const posts = (await getCollection('blog')).sort(
 
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
@@ -25,10 +25,10 @@ const posts = (await getCollection('blog')).sort(
 				<ul class="list-none p-0 m-0 flex flex-col gap-4 items-center">
 					{
 						posts.map((post) => (
-							<li class="mb-4 p-4 flex flex-row gap-2 justify-center align-middle w-fit hover:text-accent transition-colors duration-300">
+							<li class="mb-4 p-4 flex flex-row gap-2 justify-center align-middle w-fit hover:text-accent transition-all duration-300">
 								<a href={`/${post.id}/`} class="group items-center gap-4 flex flex-col">
 									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" class="group-hover:shadow-[0_0_8px_2px_rgba(0,150,255,0.4)] group-hover:animate-pulse rounded-lg"/>
+										<Image width={720} height={360} src={post.data.heroImage} alt="" class="group-hover:shadow-[0_0_12px_2px_rgba(71,32,121,0.6)] group-hover:animate-pulse rounded-lg"/>
 									)}
 									<h4 class="">{post.data.title}</h4>
 									<p class="">
