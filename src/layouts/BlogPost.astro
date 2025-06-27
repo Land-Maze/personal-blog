@@ -6,43 +6,93 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
+import { SITE_AUTHOR } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
-
-const { title, description, pubDate, updatedDate, image } = Astro.props;
+const { title, description, pubDate, updatedDate, image, imageAlt, imageCaption, tags } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
+  <head>
+    <BaseHead title={title} description={description} />
+		<meta property="article:published_time" content={pubDate.toISOString()} />
+		<meta property="article:modified_time" content={updatedDate?.toISOString()} />
+		<meta property="article:author" content={SITE_AUTHOR} />
+  </head>
 
-	<body class="flex flex-col min-h-screen bg-background text-text">
-		<Header />
-		<main class="">
-			<article>
-				<div class="hero-image">
-					{image && <Image width={1020} height={510} src={image} alt="" />}
-				</div>
-				<div class="">
-					<div class="">
-						<div class="">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+  <body class="flex flex-col min-h-screen bg-background text-text">
+    <Header />
+
+    <main class="flex-grow px-4 md:px-8 lg:px-16 xl:px-32 py-8">
+      <article
+        class="max-w-4xl mx-auto prose dark:prose-invert prose-img:rounded-lg prose-headings:scroll-mt-20"
+        itemscope
+        itemtype="https://schema.org/BlogPosting"
+      >
+        {image && (
+          <div class="rounded-lg overflow-hidden">
+            <Image
+              width={1020}
+              height={510}
+              src={image}
+              alt={imageAlt || title}
+              class="w-full h-auto object-cover"
+              loading="eager"
+              itemprop="image"
+            />
+            {imageCaption && (
+							<figcaption class="text-sm text-center text-gray-500 dark:text-gray-400">
+								{imageCaption.description && <p>{imageCaption.description}</p>}
+								{imageCaption.credit && (
+									<p>
+										<span class="text-gray-500">Credit:</span> {imageCaption.credit}
+									</p>
+								)}
+								{imageCaption.source && (
+									<p>
+										<span class="text-gray-500">Source:</span> <a href={imageCaption.source} target="_blank" rel="noopener noreferrer">{imageCaption.source}</a>
+									</p>
+								)}
+							</figcaption>
+						)}
+          </div>
+        )}
+
+        <header class="mb-6 border-b border-gray-300 dark:border-gray-700 pb-4">
+          <h1 class="text-4xl font-bold mb-2" itemprop="headline">{title}</h1>
+
+          <div class="text-sm text-gray-600 dark:text-gray-400 flex flex-wrap gap-4 items-center">
+            <time datetime={pubDate.toISOString()} itemprop="datePublished">
+              Published on <FormattedDate date={pubDate} />
+            </time>
+            {updatedDate && (
+              <time datetime={updatedDate.toISOString()} itemprop="dateModified">
+                (Updated <FormattedDate date={updatedDate} />)
+              </time>
+            )}
+            {tags && tags.length > 0 && (
+              <ul class="flex flex-wrap gap-2 ml-auto" itemprop="keywords">
+                {tags.map(tag => (
+                  <li class="inline-block">
+                    <a
+                      href={`/tags/${tag}`}
+                      class="text-xs px-2 py-1 rounded bg-accent/10 text-accent hover:underline"
+                    >
+                      #{tag}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </header>
+
+        <section itemprop="articleBody" class="prose dark:prose-invert">
+          <slot />
+        </section>
+      </article>
+    </main>
+
+    <Footer />
+  </body>
 </html>
