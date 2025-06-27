@@ -1,45 +1,56 @@
 ---
-
+import { Image } from "astro:assets";
+import sun from "../assets/sun.svg";
+import moon from "../assets/moon.svg";
 ---
 <button
   id="theme-toggle"
-  type="button"
+  class="rounded-full bg-base-200 hover:bg-base-300 transition-colors cursor-pointer"
   aria-label="Toggle theme"
-  class="relative w-12 h-6 bg-neutral-300 dark:bg-neutral-700 rounded-full transition-colors duration-300 focus:outline-none"
 >
-  <span
-    id="toggle-thumb"
-    class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-md transition-transform duration-300"
-  ></span>
+  <span id="theme-icon" class="inline-block">
+    <Image
+			id="icon-sun"
+			class="size-7 inline invert"
+			src={sun}
+			alt="Light mode icon"
+			width={0}
+			height={0} />
+    <Image
+			id="icon-moon"
+			class="size-7 inline"
+			src={moon}
+			alt="Dark mode icon"
+			width={0}
+			height={0}
+			style="display: none;" />
+  </span>
 </button>
 
-<script is:inline>
-	const html = document.documentElement;
-	const toggle = document.getElementById('theme-toggle');
-	const thumb = document.getElementById('toggle-thumb');
+<script>
+  const button = document.getElementById("theme-toggle");
+  const iconSun = document.getElementById("icon-sun");
+  const iconMoon = document.getElementById("icon-moon");
 
-	function setTheme(theme) {
-		html.setAttribute('data-theme', theme);
-		localStorage.setItem('theme', theme);
-		updateUI(theme);
-	}
+  const setIcon = (theme: string) => {
+    if (theme === "dark") {
+      if (iconSun) iconSun.style.display = "inline";
+      if (iconMoon) iconMoon.style.display = "none";
+    } else {
+      if (iconSun) iconSun.style.display = "none";
+      if (iconMoon) iconMoon.style.display = "inline";
+    }
+  };
 
-	function updateUI(theme) {
-		if (theme === 'dark') {
-			thumb.classList.add('translate-x-6');
-		} else {
-			thumb.classList.remove('translate-x-6');
-		}
-	}
+  const current = document.documentElement.getAttribute("data-theme") || "light";
+  setIcon(current);
 
-	const storedTheme = localStorage.getItem('theme');
-	const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-	const initialTheme = storedTheme || (systemPrefersDark ? 'dark' : 'light');
-	setTheme(initialTheme);
+  button?.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
 
-	toggle.addEventListener('click', () => {
-		const currentTheme = html.getAttribute('data-theme');
-		const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-		setTheme(newTheme);
-	});
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    setIcon(newTheme);
+  });
 </script>
