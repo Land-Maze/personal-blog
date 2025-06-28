@@ -1,118 +1,23 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
-import { Image } from "astro:assets";
-// FIXME: Create custom placeholder
-import BlogImagePlaceholder from "../assets/blog-placeholder-5.jpg";
-
+import PostCard from "../components/PostCard.astro";
+import Layout from "../layouts/MainLayout.astro";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<!doctype html>
-<html lang="en" data-theme="light">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <script>
-      (function () {
-        try {
-          const theme = localStorage.getItem("theme");
-          if (theme === "light" || theme === "dark") {
-            document.documentElement.setAttribute("data-theme", theme);
-          }
-        } catch (_) {}
-      })();
-    </script>
-  </head>
-
-  <body class="flex flex-col min-h-screen bg-background text-text">
-    <Header />
-    <main class="flex-1 container mx-auto p-4">
-      <section aria-label="Blog Posts List" class="px-4 sm:px-6 lg:px-8">
-        <ul class="list-none p-0 m-0 flex flex-col gap-4 items-center">
-          {
-            posts.map((post) => (
-              <>
-                <li>
-                  <article
-                    class="flex flex-col md:flex-row items-stretch gap-6 w-full max-w-5xl mx-auto group"
-                    itemscope
-                    itemtype="https://schema.org/BlogPosting"
-                  >
-                    {post.data.image && (
-                      <a href={`/${post.id}/`} class="w-full md:w-1/3">
-                        <Image
-                          width={765}
-                          height={1080}
-                          src={post.data.image}
-                          alt={
-                            post.data.imageAlt
-                              ? post.data.imageAlt
-                              : "Post Image"
-                          }
-                          itemprop="image"
-                          class="group-hover:shadow-[0_0_12px_2px_rgba(71,32,121,0.6)] group-hover:animate-pulse w-full h-full object-cover rounded-lg"
-                          loading="lazy"
-                        />
-                      </a>
-                    )}
-                    <div class="flex flex-col justify-between w-full md:w-2/3">
-                      <div class="flex flex-row items-center justify-between">
-                        <ul class="text-xs text-gray-400 dark:text-gray-600">
-                          {post.data.tags?.map((tag) => {
-                            return (
-                              <li class="inline-block mr-2">
-                                <a
-                                  href={`/tags/${tag}`}
-                                  class="cursor-pointer"
-                                  rel="tag"
-                                >
-                                  #{tag}
-                                </a>
-                              </li>
-                            );
-                          })}
-                        </ul>
-
-                        <div class="text-gray-600 dark:text-gray-400">
-                          <FormattedDate date={post.data.pubDate} />
-                        </div>
-                      </div>
-                      <h2
-                        itemprop="headline"
-                        class="text-2xl font-bold mt-2 mb-1"
-                      >
-                        {post.data.title}
-                      </h2>
-                      <p
-                        itemprop="description"
-                        class="text-gray-700 dark:text-gray-300 text-base"
-                      >
-                        {post.data.description}
-                      </p>
-                    <a
-                      href={`/${post.id}/`}
-                      class="group-hover:text-accent text-blue-600 dark:text-blue-400 mt-2 hover:underline"
-                      itemprop="url"
-                    >
-                      Read more
-                    </a>
-                    </div>
-
-                  </article>
-                </li>
-                <hr class="w-3/4 max-w-xl lg:max-w-5xl border-t border-gray-300 dark:border-gray-600 last:hidden" />
-              </>
-            ))
-          }
-        </ul>
-      </section>
-    </main>
-    <Footer />
-  </body>
-</html>
+<Layout>
+  <section aria-label="Blog Posts List" class="px-4 sm:px-6 lg:px-8">
+    <ul class="list-none p-0 m-0 flex flex-col gap-4 items-center">
+      {
+        posts.map((post) => (
+          <>
+            <PostCard post={post} />
+            <hr class="w-3/4 max-w-xl lg:max-w-5xl border-t border-gray-300 dark:border-gray-600 last:hidden" />
+          </>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>
