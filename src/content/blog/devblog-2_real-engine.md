@@ -1,9 +1,9 @@
 ---
 title: 'Real Engine - Devblog #2: Initial Setup and Rendering'
-description: ''
+description: 'Blog post explaining basic concepts of OpenGL, along with the initial setup of the Real Engine project, including creating a window and rendering a triangle.'
 pubDate: '2023-07-08'
 tags: ['devblog', 'real-engine', 'development', '3D']
-image: '/images/blog/devblog-2_render.png'
+image: '../../assets/blog/devblog-2_render.png'
 ---
 
 # Introduction
@@ -34,7 +34,7 @@ I also added CMake files to manage the build process. The project is structured 
 ## Inside the Engine Directory
 The `Engine/` directory contains the `Core/`, `Renderer/`, and `Shaders/` subdirectories. The `Core/` directory will hold the main engine logic, such as the main loop and input handling. The `Renderer/` directory will contain the rendering code, including shaders and rendering pipelines. The `Shaders/` directory will hold the shader files (`*.frag`, and `*.vert`) used by the engine.
 
-Image: ![Project Structure](/images/blog/devblog-2_engine-structure.png)
+Image: ![Project Structure](../../assets/blog/devblog-2_engine-structure.png)
 
 ---
 
