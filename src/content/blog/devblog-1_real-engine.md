@@ -1,5 +1,5 @@
 ---
-title: 'Devblog #1: Real Engine'
+title: 'Real Engine - Devblog #1: Beginning'
 description: 'A first development blog post about the Real Engine project, detailing its goals and initial steps.'
 pubDate: '2023-06-28'
 tags: ['devblog', 'real-engine', 'development', '3D']
@@ -21,10 +21,8 @@ The main goals of Real Engine are:
 # Initial Steps
 To get started, I will focus on the following tasks:
 1. **Setting Up the Project**: I will create a new repository and set up the initial project structure.
-2. **Choosing a Programming Language**: I will decide on the programming language for the engine. I am considering using C++ for its performance and control over system resources.
-3. **Creating a Window**: The first step will be to create a window where the engine can render 3D content.
-4. **Rendering a Triangle**: I will implement a basic rendering pipeline that can draw a simple triangle on the screen.
-5. **Shipping the First Version of Demo**: Once I have a basic rendering system in place, I will create a demo and a script to build and package the engine for distribution (e.g., .exe for Windows, .app for macOS, etc.).
+2. **Creating a Window**: The first step will be to create a window where the engine can render 3D content.
+3. **Rendering a Triangle**: I will implement a basic rendering pipeline that can draw a simple triangle on the screen.
 
 # Milestones
 I will set up milestones to track the progress of the project.
